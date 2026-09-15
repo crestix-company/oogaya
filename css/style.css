@@ -774,6 +774,9 @@ ul { list-style: none; }
 
 .gallery-item:hover img { transform: scale(1.05); }
 
+.gallery-item--parfait { background: #000; }
+.gallery-item--parfait img { object-fit: contain; }
+
 .gallery-btn {
   position: absolute;
   top: 50%;
