@@ -8,7 +8,7 @@
   <meta property="og:title" content="おおがさんち（大賀屋）| 焼いも専門店">
   <meta property="og:description" content="農家厳選のさつまいもを本格石焼窯で。川崎市宿河原の焼いも専門店。">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="img/1.jpeg">
+  <meta property="og:image" content="https://crestix-company.github.io/oogaya/img/hero/roasted-sweet-potato-1600.jpg">
   <title>おおがさんち（大賀屋）| 焼いも専門店</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,7 +46,10 @@
     <!-- ===== HERO ===== -->
     <section class="hero" id="hero">
       <div class="hero-bg">
-        <img src="img/1.jpeg" alt="焼きたての焼いも" class="hero-img">
+        <picture>
+          <source media="(max-width: 767px)" srcset="img/hero/roasted-sweet-potato-portrait-900.jpg 900w, img/hero/roasted-sweet-potato-portrait-1800.jpg 1800w" sizes="(max-aspect-ratio: 3/4) 75vh, 100vw">
+          <img src="img/hero/roasted-sweet-potato-1600.jpg" srcset="img/hero/roasted-sweet-potato-1600.jpg 1600w, img/hero/roasted-sweet-potato-3024.jpg 3024w" sizes="100vw" width="3024" height="2269" alt="焼いもの黄金色の断面" class="hero-img" fetchpriority="high">
+        </picture>
         <div class="hero-overlay"></div>
       </div>
       <div class="hero-content">
