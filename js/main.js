@@ -114,6 +114,7 @@
     var isDragging = false;
     var startX = 0;
     var currentTranslate = 0;
+    var hasDragged = false;
 
     function getItemsVisible() {
       if (window.innerWidth <= 767) return 1;
@@ -149,8 +150,10 @@
 
     function goTo(index) {
       current = Math.max(0, Math.min(index, maxIndex));
-      var itemWidth = items[0].offsetWidth + 12; // width + gap
-      track.style.transform = 'translateX(-' + (current * itemWidth) + 'px)';
+      var lastItem = items[total - 1];
+      var maxOffset = Math.max(0, lastItem.offsetLeft + lastItem.offsetWidth - track.parentElement.clientWidth);
+      var offset = Math.min(items[current].offsetLeft, maxOffset);
+      track.style.transform = 'translateX(-' + offset + 'px)';
       updateDots();
     }
 
@@ -164,6 +167,12 @@
     window.addEventListener('touchend', onDragEnd);
     window.addEventListener('mousemove', onDragMove);
     window.addEventListener('touchmove', onDragMove, { passive: false });
+    track.addEventListener('click', function (e) {
+      if (hasDragged && e.detail !== 0) {
+        e.preventDefault();
+        hasDragged = false;
+      }
+    });
 
     function getClientX(e) {
       return e.touches ? e.touches[0].clientX : e.clientX;
@@ -171,6 +180,8 @@
 
     function onDragStart(e) {
       isDragging = true;
+      hasDragged = false;
+      currentTranslate = 0;
       startX = getClientX(e);
     }
 
@@ -186,6 +197,7 @@
     function onDragMove(e) {
       if (!isDragging) return;
       currentTranslate = getClientX(e) - startX;
+      if (Math.abs(currentTranslate) > 10) hasDragged = true;
       if (e.cancelable && e.type === 'touchmove') e.preventDefault();
     }
 
@@ -206,8 +218,8 @@
         itemsVisible = newVisible;
         current = 0;
         buildDots();
-        goTo(0);
       }
+      goTo(current);
     });
 
     buildDots();
